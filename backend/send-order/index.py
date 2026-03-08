@@ -33,7 +33,7 @@ def handler(event: dict, context) -> dict:
 
     smtp_host = os.environ.get("SMTP_HOST", "smtp.yandex.ru")
     smtp_port = int(os.environ.get("SMTP_PORT", "465"))
-    smtp_user = os.environ.get("SMTP_USER", "oleg.zhilka@yandex.ru")
+    smtp_user = os.environ.get("SMTP_USER", "oleg.zhilka")
     smtp_password = os.environ.get("SMTP_PASSWORD", "bkqufcrqakeyhfly")
     notify_email = os.environ.get("NOTIFY_EMAIL", "oleg.zhilka@yandex.ru")
 
