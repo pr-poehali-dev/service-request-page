@@ -5,50 +5,74 @@ const services = [
   {
     id: 1,
     number: "01",
-    title: "Веб-разработка",
-    description: "Создание сайтов и веб-приложений под ключ — от лендинга до сложных платформ.",
-    price: "от 50 000 ₽",
-    duration: "2–4 недели",
+    title: "Загрузка отчётности через ЛКН",
+    description: "Информационные отчёты, отчёты о проведении локального мониторинга, ГГО. Загрузка посредством Личного кабинета недропользователя.",
+    price: "5 000 ₽ / вид",
+    duration: "1 неделя",
+    note: "",
   },
   {
     id: 2,
     number: "02",
-    title: "Дизайн интерфейсов",
-    description: "UI/UX дизайн с акцентом на пользовательский опыт, прототипирование и визуальную систему.",
-    price: "от 30 000 ₽",
-    duration: "1–2 недели",
+    title: "Составление отчётности через ЛКН",
+    description: "Составление информационных отчётов, отчётов о локальном мониторинге, ГГО по материалам заказчика.",
+    price: "15 000 ₽ / вид",
+    duration: "2 недели",
+    note: "",
   },
   {
     id: 3,
     number: "03",
-    title: "Мобильное приложение",
-    description: "Разработка iOS и Android приложений с единой кодовой базой на React Native.",
-    price: "от 120 000 ₽",
-    duration: "4–8 недель",
+    title: "Составление паспорта ГКМ",
+    description: "При отсутствии паспорта в составе комплекта. Стоимость зависит от категории сложности геологического строения месторождения (1–4), указанной в отчёте.",
+    price: "от 20 000 ₽",
+    duration: "1–4 недели",
+    note: "1 кат. — от 20 000 ₽ / 2 кат. — от 30 000 ₽ / 3 кат. — от 40 000 ₽ / 4 кат. — от 50 000 ₽",
   },
   {
     id: 4,
     number: "04",
-    title: "SEO-продвижение",
-    description: "Технический аудит, оптимизация контента и построение ссылочного профиля для роста трафика.",
-    price: "от 15 000 ₽/мес",
-    duration: "Ежемесячно",
+    title: "Проверка отчёта на соответствие ГОСТ 53579-2009",
+    description: "Проверка представленных материалов заказчика на соответствие действующему стандарту.",
+    price: "5 000–10 000 ₽",
+    duration: "1–2 недели",
+    note: "До 100 листов — 5 000 ₽, свыше 100 листов — 10 000 ₽",
   },
   {
     id: 5,
     number: "05",
-    title: "Техническая поддержка",
-    description: "Обслуживание, обновления и оперативное устранение неполадок на существующих проектах.",
-    price: "от 10 000 ₽/мес",
-    duration: "Ежемесячно",
+    title: "Библиографические списки",
+    description: "Подбор геологических отчётов и материалов по работам, проведённым ранее на исследуемой территории (РГФ, ТФГИ, инвентарники, рефераты, координаты).",
+    price: "от 10 000 ₽",
+    duration: "2 недели",
+    note: "До 30 000 ₽ в зависимости от согласованного объёма и вида передаваемой информации",
   },
   {
     id: 6,
     number: "06",
-    title: "Интеграции и API",
-    description: "Подключение CRM, платёжных систем, сторонних сервисов и разработка собственного API.",
-    price: "от 20 000 ₽",
-    duration: "1–3 недели",
+    title: "Загрузка комплекта материалов в ЕФГИ",
+    description: "Первичная загрузка до получения 1-го уведомления, исправление замечаний, сопровождение до статуса «Принята электронная версия».",
+    price: "от 100 000 ₽",
+    duration: "от 1 нед. / от 3 мес.",
+    note: "Первичная — от 100 000 ₽ / Исправление замечаний — 20 000 ₽ / До принятия — от 120 000 ₽",
+  },
+  {
+    id: 7,
+    number: "07",
+    title: "Консультирование",
+    description: "Разъяснение вопросов по взаимодействию с системой геологических фондов, помощь при составлении официальных писем и обращений.",
+    price: "от 3 000 ₽",
+    duration: "1 час",
+    note: "",
+  },
+  {
+    id: 8,
+    number: "08",
+    title: "Анализ геологической информации",
+    description: "Сбор сведений о представленной геологической информации в фонды из открытых источников. Необходимо оформить подписку на ЕКН.",
+    price: "от 10 000 ₽",
+    duration: "1 неделя",
+    note: "",
   },
 ];
 
@@ -143,9 +167,14 @@ export default function Index() {
               <h3 className={`font-display text-2xl font-medium mb-3 transition-colors duration-300 ${selectedService === service.id ? "text-[#FAFAF8]" : "text-[#1a1a1a] group-hover:text-[#FAFAF8]"}`}>
                 {service.title}
               </h3>
-              <p className={`font-body text-sm leading-relaxed mb-6 transition-colors duration-300 ${selectedService === service.id ? "text-[#FAFAF8]/70" : "text-[#6b6760] group-hover:text-[#FAFAF8]/70"}`}>
+              <p className={`font-body text-sm leading-relaxed mb-4 transition-colors duration-300 ${selectedService === service.id ? "text-[#FAFAF8]/70" : "text-[#6b6760] group-hover:text-[#FAFAF8]/70"}`}>
                 {service.description}
               </p>
+              {service.note && (
+                <p className={`font-body text-xs leading-relaxed mb-4 italic transition-colors duration-300 ${selectedService === service.id ? "text-[#FAFAF8]/40" : "text-[#9a9590] group-hover:text-[#FAFAF8]/40"}`}>
+                  {service.note}
+                </p>
+              )}
               <div className={`flex items-center justify-between pt-4 border-t transition-colors duration-300 ${selectedService === service.id ? "border-[#FAFAF8]/20" : "border-[#e8e6e0] group-hover:border-[#FAFAF8]/20"}`}>
                 <span className={`font-body text-sm font-medium transition-colors duration-300 ${selectedService === service.id ? "text-[#FAFAF8]" : "text-[#1a1a1a] group-hover:text-[#FAFAF8]"}`}>
                   {service.price}
