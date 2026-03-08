@@ -87,6 +87,8 @@ const initialForm = {
 export default function Index() {
   const [form, setForm] = useState(initialForm);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const [selectedService, setSelectedService] = useState<number | null>(null);
 
   const handleServiceClick = (service: typeof services[0]) => {
@@ -99,9 +101,23 @@ export default function Index() {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    setError("");
+    try {
+      const res = await fetch("https://functions.poehali.dev/39a15872-6861-4893-ade1-0ecab035a2c4", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error("Ошибка отправки");
+      setSubmitted(true);
+    } catch {
+      setError("Не удалось отправить заявку. Попробуйте позже или свяжитесь с нами напрямую.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -299,11 +315,16 @@ export default function Index() {
                   />
                 </div>
 
+                {error && (
+                  <p className="font-body text-xs text-red-500 text-center">{error}</p>
+                )}
+
                 <button
                   type="submit"
-                  className="w-full bg-[#1a1a1a] text-[#FAFAF8] font-body text-sm font-medium py-4 px-8 hover:bg-[#333] transition-colors duration-300 tracking-wide uppercase"
+                  disabled={loading}
+                  className="w-full bg-[#1a1a1a] text-[#FAFAF8] font-body text-sm font-medium py-4 px-8 hover:bg-[#333] transition-colors duration-300 tracking-wide uppercase disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Отправить заявку
+                  {loading ? "Отправляем..." : "Отправить заявку"}
                 </button>
 
                 <p className="font-body text-xs text-[#9a9590] text-center leading-relaxed">
