@@ -29,7 +29,7 @@ def handler(event: dict, context) -> dict:
     comment = body.get("comment", "").strip()
 
     if not name or not phone or not service:
-        return {"statusCode": 400, "headers": cors_headers, "body": {"error": "Missing required fields"}}
+        return {"statusCode": 400, "headers": cors_headers, "body": json.dumps({"error": "Missing required fields"})}
 
     smtp_host = os.environ["SMTP_HOST"]
     smtp_port = int(os.environ["SMTP_PORT"])
