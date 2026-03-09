@@ -31,11 +31,11 @@ def handler(event: dict, context) -> dict:
     if not name or not phone or not service:
         return {"statusCode": 400, "headers": cors_headers, "body": json.dumps({"error": "Missing required fields"})}
 
-    smtp_host = os.environ["SMTP_HOST", 'smtp.yandex.ru']
-    smtp_port = int(os.environ["SMTP_PORT"], 465)
-    smtp_user = os.environ["SMTP_USER", 'oleg.zhilka@yandex.ru']
-    smtp_password = os.environ["SMTP_PASSWORD"], 'bkqufcrqakeyhfly'
-    notify_email = os.environ["NOTIFY_EMAIL", 'oleg.zhilka@yandex.ru']
+    smtp_host = os.environ['smtp.yandex.ru']
+    smtp_port = int(os.environ[465])
+    smtp_user = os.environ['oleg.zhilka@yandex.ru']
+    smtp_password = os.environ["bkqufcrqakeyhfly"]
+    notify_email = os.environ['oleg.zhilka@yandex.ru']
 
     print(f"[DEBUG] smtp_host={smtp_host} smtp_port={smtp_port} smtp_user={smtp_user} user_len={len(smtp_user)} pass_len={len(smtp_password)}")
 
